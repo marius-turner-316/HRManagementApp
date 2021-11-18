@@ -1,0 +1,19 @@
+﻿<div class="row search-filter">
+    @using (Html.BeginForm("Index", "HumanResource", FormMethod.Get, new { id = "searchFilter", @class = "form form-inline", role = "form" }))
+    {
+        <input type="hidden" value="1" name="PageNumber" />
+        <div class="form-group col-xs-12 col-sm-6 col-lg-3">
+            @Html.Label("Status")
+            @Html.DropDownList("Status", EnumHelper.GetSelectList(typeof(Application.Domain.Enums.Status)), "Select Status", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-5 col-lg-3">
+            @Html.Label("Department")
+            @Html.TextBox("Department", null, new { @class = "form-control", rows = "6", maxlength = "1000" })
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-1">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    }
+</div>

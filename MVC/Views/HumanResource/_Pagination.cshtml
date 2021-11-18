@@ -1,0 +1,58 @@
+﻿@model MVC.Models.PagingVM
+
+@if (Model.TotalPages > 0) 
+{ 
+<nav>
+    <ul class="pagination">
+        <li class="@(Model.PageNumber == 1 ? "disabled" : "")">
+            <a href="@Url.Action("Index", "HumanResource", new
+                    {
+                        PageNumber = 1,
+                        Status = this.ViewContext.HttpContext.Request.QueryString.Get("Status"),
+                        Department = this.ViewContext.HttpContext.Request.QueryString.Get("Department")
+                    }, null)" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            if (i == Model.PageNumber && Model.PageNumber == 1)
+            {
+            }
+
+            if (i == Model.PageNumber)
+            {
+                <li class="active">
+                    @Html.ActionLink(i.ToString(), "Index", "HumanResource", new
+                    {
+                        PageNumber = i,
+                        Status = this.ViewContext.HttpContext.Request.QueryString.Get("Status"),
+                        Department = this.ViewContext.HttpContext.Request.QueryString.Get("Department")
+                    }, null)
+                </li>
+            }
+            else
+            {
+                <li>
+                    @Html.ActionLink(i.ToString(), "Index", "HumanResource", new
+                    {
+                        PageNumber = i,
+                        Status = this.ViewContext.HttpContext.Request.QueryString.Get("Status"),
+                        Department = this.ViewContext.HttpContext.Request.QueryString.Get("Department")
+                    }, null)
+                </li>
+            }
+        }
+        <li class="@(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+            <a href="@Url.Action("Index", "HumanResource", new
+                    {
+                        PageNumber = Model.TotalPages,
+                        Status = this.ViewContext.HttpContext.Request.QueryString.Get("Status"),
+                        Department = this.ViewContext.HttpContext.Request.QueryString.Get("Department")
+                    }, null)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+}
