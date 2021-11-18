@@ -44,6 +44,11 @@ ON [dbo].[HumanResource]([Status])
 
 GO
 
+CREATE INDEX IX_FirstName
+ON [dbo].[HumanResource]([FirstName])
+
+GO
+
 -- Optionally, add dummy data
 
 INSERT INTO [dbo].[HumanResource]([FirstName],[Surname],[Email],[DOB],[Department],[Status],[EmployeeNumber],[AddedOn])
