@@ -1,10 +1,20 @@
 ﻿using Application.Domain;
+using FluentValidation;
 
 namespace Application.HumanResources.Commands.CreateHumanResource
 {
-    internal static class Mapper
+    internal static class CreateHumanResourceCommandExtensions
     {
-        public static HumanResource MapToHumanResource(CreateHumanResourceCommand request)
+        public static void Validate(
+            this CreateHumanResourceCommand request,
+            IValidator<CreateHumanResourceCommand> validator)
+        {
+            var results = validator.Validate(request);
+            if (!results.IsValid) throw new Common.Exceptions.ValidationException(results.Errors);
+        }
+
+        public static HumanResource MapToHumanResource(
+            this CreateHumanResourceCommand request)
         {
             var model = new HumanResource();
             model.FirstName = request.FirstName;

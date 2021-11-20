@@ -39,10 +39,8 @@ namespace Application.HumanResources.Commands.UpdateHumanResource
 
         public async Task<Unit> Handle(UpdateHumanResourceCommand request, CancellationToken cancellationToken)
         {
-            var results = _validator.Validate(request);
-            if (!results.IsValid) throw new Common.Exceptions.ValidationException(results.Errors);
-
-            var model = Mapper.MapToHumanResource(request);
+            request.Validate(_validator);
+            var model = request.MapToHumanResource();
             _ = await _repository.UpdateAsync(model);
 
             return Unit.Value;

@@ -55,10 +55,10 @@
     <Compile Include="Domain\HumanResource.cs" />
     <Compile Include="HumanResources\Commands\CreateHumanResource\CreateHumanResourceCommand.cs" />
     <Compile Include="HumanResources\Commands\CreateHumanResource\CreateHumanResourceCommandValidator.cs" />
-    <Compile Include="HumanResources\Commands\CreateHumanResource\Mapper.cs" />
+    <Compile Include="HumanResources\Commands\CreateHumanResource\CreateHumanResourceCommandExtensions.cs" />
     <Compile Include="HumanResources\Commands\DeleteHumanResource\DeleteHumanResourceCommand.cs" />
-    <Compile Include="HumanResources\Commands\UpdateHumanResource\Mapper.cs" />
     <Compile Include="HumanResources\Commands\UpdateHumanResource\UpdateHumanResourceCommand.cs" />
+    <Compile Include="HumanResources\Commands\UpdateHumanResource\UpdateHumanResourceCommandExtensions.cs" />
     <Compile Include="HumanResources\Commands\UpdateHumanResource\UpdateHumanResourceCommandValidator.cs" />
     <Compile Include="HumanResources\Queries\GetHumanResources\HumanResourceDto.cs" />
     <Compile Include="HumanResources\Queries\GetHumanResources\Mapper.cs" />
@@ -73,6 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

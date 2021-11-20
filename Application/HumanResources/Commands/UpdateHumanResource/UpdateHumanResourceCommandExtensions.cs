@@ -1,10 +1,20 @@
 ﻿using Application.Domain;
+using FluentValidation;
 
 namespace Application.HumanResources.Commands.UpdateHumanResource
 {
-    internal static class Mapper
+    internal static class UpdateHumanResourceCommandExtensions
     {
-        public static HumanResource MapToHumanResource(UpdateHumanResourceCommand request)
+        public static void Validate(
+            this UpdateHumanResourceCommand request,
+            IValidator<UpdateHumanResourceCommand> validator)
+        {
+            var results = validator.Validate(request);
+            if (!results.IsValid) throw new Common.Exceptions.ValidationException(results.Errors);
+        }
+
+        public static HumanResource MapToHumanResource(
+            this UpdateHumanResourceCommand request)
         {
             var model = new HumanResource();
             model.HumanResourceId = request.HumanResourceId;

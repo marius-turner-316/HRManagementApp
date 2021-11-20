@@ -38,10 +38,8 @@ namespace Application.HumanResources.Commands.CreateHumanResource
 
         public async Task<Unit> Handle(CreateHumanResourceCommand request, CancellationToken cancellationToken)
         {
-            var results = _validator.Validate(request);
-            if (!results.IsValid) throw new Common.Exceptions.ValidationException(results.Errors);
-
-            var model = Mapper.MapToHumanResource(request);
+            request.Validate(_validator);
+            var model = request.MapToHumanResource();
             await _repository.AddAsync(model);
 
             return Unit.Value;
