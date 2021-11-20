@@ -1,11 +1,11 @@
-﻿using Application.Common.Exceptions;
-using Application.HumanResources.Commands.CreateHumanResource;
+﻿using Application.HumanResources.Commands.CreateHumanResource;
 using Application.HumanResources.Commands.DeleteHumanResource;
 using Application.HumanResources.Commands.UpdateHumanResource;
 using Application.HumanResources.Queries.GetHumanResources;
 using Application.HumanResources.Queries.GetOneHumanResource;
 using MediatR;
 using MVC.Extensions;
+using MVC.Filters;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -37,19 +37,11 @@ namespace MVC.Controllers
 
         [HttpPost]
         [Route("HumanResource/Create")]
+        [ValidationExceptionFilter]
         public async Task<ActionResult> Create(CreateHumanResourceCommand command)
         {
-            // Todo: Look into using exception filter to keep this more clean
-            try
-            {
-                await _mediator.Send(command);
-                return RedirectToAction("Index");
-            }
-            catch (ValidationException ex)
-            {
-                ex.AddToModelState(ViewData.ModelState);
-                return View(command);
-            }
+            await _mediator.Send(command);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -62,19 +54,11 @@ namespace MVC.Controllers
 
         [HttpPost]
         [Route("HumanResource/Update")]
+        [ValidationExceptionFilter]
         public async Task<ActionResult> Update(UpdateHumanResourceCommand command)
         {
-            // Todo: Look into using exception filter to keep this more clean
-            try
-            {
-                await _mediator.Send(command);
-                return RedirectToAction("Index");
-            }
-            catch (ValidationException ex)
-            {
-                ex.AddToModelState(ViewData.ModelState);
-                return View(command);
-            }
+            await _mediator.Send(command);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

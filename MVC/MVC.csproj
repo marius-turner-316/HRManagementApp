@@ -164,6 +164,7 @@
     <Compile Include="Controllers\HumanResourceController.cs" />
     <Compile Include="Extensions\HumanResourceVMExtensions.cs" />
     <Compile Include="Extensions\ValidationExceptionExtensions.cs" />
+    <Compile Include="Filters\ValidationExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
