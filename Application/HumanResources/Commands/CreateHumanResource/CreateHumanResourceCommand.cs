@@ -3,6 +3,7 @@ using Application.Domain.Enums;
 using FluentValidation;
 using MediatR;
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,15 +12,19 @@ namespace Application.HumanResources.Commands.CreateHumanResource
 {
     public class CreateHumanResourceCommand : IRequest
     {
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
 
+        [DisplayName("Date of Birth")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DOB { get; set; }
         public string Department { get; set; }
         public Status Status { get; set; }
+
+        [DisplayName("Employee Number")]
         public int EmployeeNumber { get; set; }
     }
 

@@ -20,6 +20,7 @@ namespace MVC.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet]
         [Route]
         [Route("HumanResource")]
         [Route("HumanResource/Index")]
