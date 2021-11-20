@@ -209,6 +209,7 @@
     <Content Include="Views\HumanResource\Create.cshtml" />
     <Content Include="Views\HumanResource\Update.cshtml" />
     <Content Include="Views\HumanResource\_Pagination.cshtml" />
+    <Content Include="Views\HumanResource\_HumanResourceList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

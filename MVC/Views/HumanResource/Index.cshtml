@@ -16,51 +16,13 @@
     @Html.ActionLink("Add a new Human Resource", "Create", null, new { @class = "btn btn-primary pull-right" })
 </div>
 
-<div class="table-responsive">
-    <table class="table">
-        <caption style="display: none">Human Resources</caption>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Date of Birth</th>
-                <th>Department</th>
-                <th>Status</th>
-                <th>Employee Number</th>
-                <th>&nbsp;</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Items)
-            {
-                <tr>
-                    <td>@item.FirstName @item.Surname</td>
-                    <td>@(item.DOB != null ? item.DOB.Value.ToString("dd/MM/yyyy") : "&nbsp;")</td>
-                    <td>@item.Department</td>
-                    <td>@item.Status</td>
-                    <td>@item.EmployeeNumber</td>
-                    <td class="text-center">
+@Html.Partial("_HumanResourceList", Model.Items)
 
-                        @using (Html.BeginForm("Delete", "HumanResource", new { HumanResourceId = item.HumanResourceId }, FormMethod.Post, new { @class = "form form-inline deleteForm" }))
-                        {
-                            <a href="@Url.Action("Update", "HumanResource")/@item.HumanResourceId"
-                               class="btn btn-default">
-                                Edit
-                            </a>
-                            <input type="submit" value="Delete" class="btn btn-secondary" />
-                        }
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-
-
-    @Html.Partial("_Pagination", new MVC.Models.PagingVM
-    {
-        PageNumber = Model.PageNumber,
-        TotalPages = Model.TotalPages
-    })
+@Html.Partial("_Pagination", new MVC.Models.PagingVM
+{
+    PageNumber = Model.PageNumber,
+    TotalPages = Model.TotalPages
+})
 
 
 @section scripts
