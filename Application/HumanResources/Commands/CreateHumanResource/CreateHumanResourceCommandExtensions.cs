@@ -17,11 +17,11 @@ namespace Application.HumanResources.Commands.CreateHumanResource
             this CreateHumanResourceCommand request)
         {
             var model = new HumanResource();
-            model.FirstName = request.FirstName;
-            model.Surname = request.Surname;
-            model.Email = request.Email;
+            model.FirstName = request.FirstName?.Trim();
+            model.Surname = request.Surname?.Trim();
+            model.Email = request.Email?.Trim().ToLower();
             model.DOB = request.DOB;
-            model.Department = request.Department;
+            model.Department = request.Department?.Trim();
             model.Status = request.Status;
             model.EmployeeNumber = request.EmployeeNumber;
 
