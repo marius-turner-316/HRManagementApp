@@ -50,12 +50,12 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public async Task<PaginatedList<HumanResource>> GetAllAsync(int? status = null, string department = null, int pageNumber = 1)
+        public async Task<PaginatedList<HumanResource>> GetAllAsync(int? statusId = null, int? departmentId = null, int pageNumber = 1)
         {
             var sql = @"SELECT HumanResourceId,FirstName,Surname,Email,DOB,Department,Status,EmployeeNumber 
                         FROM HumanResource
-                        WHERE (@Status IS NULL OR Status = @Status) AND
-                              (@Department IS NULL OR Department LIKE CONCAT('%',@Department,'%')) AND
+                        WHERE (@StatusId IS NULL OR StatusId = @StatusId) AND
+                              (@DepartmentId IS NULL OR DepartmentId = @DepartmentId) AND
                               (DeletedOn IS NULL)
                         ORDER BY FirstName, Surname
                         OFFSET @Offset ROWS
@@ -63,8 +63,8 @@ namespace Infrastructure.Repositories
 
                         SELECT COUNT(*)
                         FROM HumanResource
-                        WHERE (@Status IS NULL OR Status = @Status) AND
-                              (@Department IS NULL OR Department LIKE '%@Department%') AND
+                        WHERE (@StatusId IS NULL OR StatusId = @StatusId) AND
+                              (@DepartmentId IS NULL OR DepartmentId = @DepartmentId) AND
                               (DeletedOn IS NULL)";
 
             using (var connection = new SqlConnection(_config.ConnectionString))
@@ -72,8 +72,8 @@ namespace Infrastructure.Repositories
                 await connection.OpenAsync();
                 using (var multi = await connection.QueryMultipleAsync(sql, new
                 {
-                    Status = status,
-                    Department = department,
+                    StatusId = statusId,
+                    DepartmentId = departmentId,
                     Offset = (pageNumber - 1) * _config.TotalResultsPerPage,
                     PageSize = _config.TotalResultsPerPage
                 }))

@@ -62,11 +62,12 @@
     <Compile Include="HumanResources\Commands\UpdateHumanResource\UpdateHumanResourceCommand.cs" />
     <Compile Include="HumanResources\Commands\UpdateHumanResource\UpdateHumanResourceCommandExtensions.cs" />
     <Compile Include="HumanResources\Commands\UpdateHumanResource\UpdateHumanResourceCommandValidator.cs" />
+    <Compile Include="HumanResources\Queries\GetHumanResources\DepartmentDto.cs" />
+    <Compile Include="HumanResources\Queries\GetHumanResources\Extensions.cs" />
+    <Compile Include="HumanResources\Queries\GetHumanResources\GetHumanResourcesQueryResult.cs" />
     <Compile Include="HumanResources\Queries\GetHumanResources\HumanResourceDto.cs" />
-    <Compile Include="HumanResources\Queries\GetHumanResources\Mapper.cs" />
     <Compile Include="HumanResources\Queries\GetOneHumanResource\GetOneHumanResourceQuery.cs" />
     <Compile Include="HumanResources\Queries\GetHumanResources\GetHumanResourcesQuery.cs" />
-    <Compile Include="HumanResources\Queries\GetHumanResources\HumanResourcesVM.cs" />
     <Compile Include="HumanResources\Queries\GetOneHumanResource\HumanResourceVM.cs" />
     <Compile Include="Common\Interfaces\IHumanResourceRepository.cs" />
     <Compile Include="Common\Models\PaginatedList.cs" />

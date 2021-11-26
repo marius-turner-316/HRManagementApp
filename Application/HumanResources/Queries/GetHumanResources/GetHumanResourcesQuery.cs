@@ -5,26 +5,39 @@ using System.Threading.Tasks;
 
 namespace Application.HumanResources.Queries.GetHumanResources
 {
-    public class GetHumanResourcesQuery : IRequest<HumanResourcesVM>
+    public class GetHumanResourcesQuery : IRequest<GetHumanResourcesQueryResult>
     {
-        public int? Status { get; set; }
-        public string Department { get; set; }
+        public int? StatusId { get; set; }
+        public int? DepartmentId { get; set; }
         public int PageNumber { get; set; } = 1;
     }
 
-    public class GetHumanResourcesQueryHandler : IRequestHandler<GetHumanResourcesQuery, HumanResourcesVM>
+    public class GetHumanResourcesQueryHandler : IRequestHandler<GetHumanResourcesQuery, GetHumanResourcesQueryResult>
     {
         private readonly IHumanResourceRepository _repository;
+        private readonly IDepartmentRepository _departmentRepository;
+        private readonly IConfiguration _configuration;
 
-        public GetHumanResourcesQueryHandler(IHumanResourceRepository repository)
+        public GetHumanResourcesQueryHandler(
+            IHumanResourceRepository repository,
+            IDepartmentRepository departmentRepository,
+            IConfiguration configuration)
         {
             _repository = repository;
+            _departmentRepository = departmentRepository;
+            _configuration = configuration;
         }
 
-        public async Task<HumanResourcesVM> Handle(GetHumanResourcesQuery request, CancellationToken cancellationToken)
+        public async Task<GetHumanResourcesQueryResult> Handle(GetHumanResourcesQuery request, CancellationToken cancellationToken)
         {
-            var result = await _repository.GetAllAsync(request.Status, request.Department, request.PageNumber);
-            return Mapper.MapToHumanResourceVM(result);
+            var humanResources = await _repository.GetAllAsync(request.StatusId, request.DepartmentId, request.PageNumber);
+            var departments = await _departmentRepository.GetAll();
+
+            return new GetHumanResourcesQueryResult
+            {
+                HumanResources = humanResources.MapToPaginatedHumanResourceDto(_configuration.TotalResultsPerPage),
+                Departments = departments.MapToDepartmentDtos()
+            };
         }
     }
 }
