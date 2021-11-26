@@ -50,7 +50,9 @@
   <ItemGroup>
     <Compile Include="Common\Exceptions\ValidationException.cs" />
     <Compile Include="Common\Interfaces\IConfiguration.cs" />
+    <Compile Include="Common\Interfaces\IDepartmentRepository.cs" />
     <Compile Include="Common\Interfaces\ISystemClock.cs" />
+    <Compile Include="Domain\Department.cs" />
     <Compile Include="Domain\Enums\Status.cs" />
     <Compile Include="Domain\HumanResource.cs" />
     <Compile Include="HumanResources\Commands\CreateHumanResource\CreateHumanResourceCommand.cs" />
